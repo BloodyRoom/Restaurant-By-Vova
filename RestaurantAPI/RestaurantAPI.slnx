@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="Core/Core.csproj" Id="a83530ed-30e5-4664-aebf-873b8cd7d661" />
+  <Project Path="Domain/Domain.csproj" Id="1bbf6905-2c83-4b55-ae59-ec5b1f0986f1" />
   <Project Path="RestaurantAPI/RestaurantAPI.csproj" />
 </Solution>
