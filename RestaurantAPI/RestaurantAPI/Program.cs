@@ -1,5 +1,9 @@
+using Core.Interfaces;
+using Core.Services;
 using Domain;
+using Domain.Entities.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
@@ -16,6 +20,19 @@ builder.Services.AddDbContext<RestaurantDbContext>(opt =>
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+
+builder.Services.AddIdentity<UserEntity, RoleEntity>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.User.RequireUniqueEmail = true;
+})
+    .AddEntityFrameworkStores<RestaurantDbContext>()
+    .AddDefaultTokenProviders();
 
 
 builder.Services.AddOpenApi(opt =>
@@ -66,6 +83,9 @@ builder.Services
         };
     });
 
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+builder.Services.AddAutoMapper(cfg => { }, AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddAuthorization();
 
