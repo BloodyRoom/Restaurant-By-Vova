@@ -9,6 +9,8 @@ public class CategoryMapper : Profile
     public CategoryMapper()
     {
         CreateMap<CategoryEntity, CategoryModel>();
+        CreateMap<CategoryCreateModel, CategoryEntity>()
+            .ForMember(opt => opt.Image, x=>x.Ignore());
     }
 
 }

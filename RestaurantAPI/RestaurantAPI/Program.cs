@@ -1,5 +1,6 @@
 using Core.Interfaces;
 using Core.Mappers;
+using Core.Queries.Categories;
 using Core.Repositories;
 using Core.Services;
 using Domain;
@@ -91,7 +92,7 @@ builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericReposito
 
 builder.Services.AddAutoMapper(typeof(AccountMapper));
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCategoriesQuery).Assembly));
 
 builder.Services.AddAuthorization();
 

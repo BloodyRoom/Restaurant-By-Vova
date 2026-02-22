@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Core.Queries.Categories;
 
-public record GetCategoriesQuery(long typeId)
+public record GetCategoriesQuery()
     : IRequest<IEnumerable<CategoryModel>>;
