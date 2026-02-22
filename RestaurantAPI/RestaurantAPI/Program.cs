@@ -1,4 +1,5 @@
 using Core.Interfaces;
+using Core.Repositories;
 using Core.Services;
 using Domain;
 using Domain.Entities.Identity;
@@ -84,6 +85,8 @@ builder.Services
     });
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
 builder.Services.AddAutoMapper(cfg => { }, AppDomain.CurrentDomain.GetAssemblies());
 
