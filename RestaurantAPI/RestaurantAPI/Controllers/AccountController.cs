@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using Core.Commands.Account;
 using Core.Constants;
 using Core.Interfaces;
 using Core.Models.Account;
 using Domain.Entities.Identity;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace RestaurantAPI.Controllers;
 
@@ -14,22 +17,18 @@ namespace RestaurantAPI.Controllers;
 public class AccountController(UserManager<UserEntity> userManager,
         IMapper mapper,
         IJwtTokenService jwtTokenService,
-        RoleManager<RoleEntity> roleManager) : Controller
+        RoleManager<RoleEntity> roleManager,
+        IMediator mediator) : Controller
 {
 
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
-        var user = await userManager.FindByEmailAsync(model.Email);
-        if (user == null)
-        {
-            return BadRequest("Виникла помилка під час входу, повторіть спробу пізніше.");
-        }
-        var token = await jwtTokenService.CreateTokenAsync(user);
-        return Ok(new
-        {
-            token,
-        });
+        var result = await mediator.Send(new LoginCommand(model));
+
+        if (!result.IsSuccess) return BadRequest(result.Error);
+
+        return Ok(result.Value);
     }
 
 
