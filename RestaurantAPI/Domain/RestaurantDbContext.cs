@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Identity;
+﻿using Domain.Entities;
+using Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,8 @@ public class RestaurantDbContext : IdentityDbContext<UserEntity, RoleEntity, lon
 {
     public RestaurantDbContext(DbContextOptions<RestaurantDbContext> dbContextOptions)
         : base(dbContextOptions) { }
+
+    public DbSet<CategoryEntity> Categories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -1,0 +1,21 @@
+﻿using Core.Commands.Categories;
+using Core.Models.Categories;
+using Core.Queries.Categories;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace RestaurantAPI.Controllers;
+
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class CategoriesController(IMediator mediator) : Controller
+{
+    [HttpGet]
+    public async Task<IActionResult> Get()
+        => Ok(await mediator.Send(new GetCategoriesQuery()));
+
+    [HttpPost]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Create([FromForm] CategoryCreateModel model)
+        => Ok(await mediator.Send(new CategoryCreateCommand(model)));
+}
