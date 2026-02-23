@@ -18,4 +18,15 @@ public class CategoriesController(IMediator mediator) : Controller
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> Create([FromForm] CategoryCreateModel model)
         => Ok(await mediator.Send(new CategoryCreateCommand(model)));
+
+    [HttpPatch]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Update([FromForm] CategoryUpdateModel model)
+    {
+        var result = await mediator.Send(new CategoryUpdateCommand(model));
+
+        if (!result.IsSuccess) return BadRequest(result.Error);
+
+        return Ok(result.Value);
+    }
 }
