@@ -34,52 +34,12 @@ public class AccountController(UserManager<UserEntity> userManager,
 
 
     [HttpPost]
-    public async Task<IActionResult> Register([FromForm] RegisterModel model)
+    public async Task<IActionResult> Register([FromBody] RegisterModel model)
     {
-        var user = mapper.Map<UserEntity>(model);
+        var result = await mediator.Send(new RegisterCommand(model));
 
-        var result = await userManager.CreateAsync(user, model.Password);
-        if (result.Succeeded)
-        {
-            try
-            {
-                result = await userManager.AddToRoleAsync(user, Roles.User);
-                if (result.Succeeded)
-                {
-                    var token = await jwtTokenService.CreateTokenAsync(user);
-                    return Ok(new
-                    {
-                        token
-                    });
-                }
-            }
-            catch (InvalidOperationException) // коли немає створеної ролі в бд, то створюємо її
-            {
-                result = await roleManager.CreateAsync(new RoleEntity { Name = Roles.User });
-                if (result.Succeeded)
-                {
-                    result = await userManager.AddToRoleAsync(user, Roles.User);
-                    if (result.Succeeded)
-                    {
-                        var token = await jwtTokenService.CreateTokenAsync(user);
-                        return Ok(new
-                        {
-                            token
-                        });
-                    }
-                }
-            }
-        }
-        else
-        {
-            string errorMsg = "";
-            foreach (var error in result.Errors)
-            {
-                errorMsg += $"{error.Description}\n";
-            }
-            return BadRequest(errorMsg);
-        }
+        if (!result.IsSuccess) return BadRequest(result.Error);
 
-        return BadRequest("Виникла помилка під час реєстрації, повторіть спробу пізніше.");
+        return Ok(result.Value);
     }
 }
