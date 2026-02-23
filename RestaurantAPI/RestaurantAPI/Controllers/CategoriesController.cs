@@ -29,4 +29,8 @@ public class CategoriesController(IMediator mediator) : Controller
 
         return Ok(result.Value);
     }
+
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromBody] CategoryDeleteModel model)
+        => Ok(await mediator.Send(new CategoryDeleteCommand(model)));
 }

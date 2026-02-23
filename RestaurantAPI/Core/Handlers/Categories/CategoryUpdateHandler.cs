@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Core.Handlers.Categories;
 
-public class CategoryUpdateCommandHandler(
+public class CategoryUpdateHandler(
     IGenericRepository<CategoryEntity, long> repository,
     IMapper mapper,
     IImageService imageService) : IRequestHandler<CategoryUpdateCommand, Result<CategoryModel>>
