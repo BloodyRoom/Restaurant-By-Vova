@@ -37,4 +37,8 @@ public class ProductsController(IMediator mediator) : Controller
 
         return Ok(result.Value);
     }
+
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromBody] ProductDeleteModel model)
+        => Ok(await mediator.Send(new ProductDeleteCommand(model)));
 }
