@@ -26,4 +26,15 @@ public class ProductsController(IMediator mediator) : Controller
 
         return Ok(result.Value);
     }
+
+    [HttpPatch]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Update([FromForm] ProductUpdateModel model)
+    {
+        var result = await mediator.Send(new ProductUpdateCommand(model));
+
+        if (!result.IsSuccess) return BadRequest(result.Error);
+
+        return Ok(result.Value);
+    }
 }
