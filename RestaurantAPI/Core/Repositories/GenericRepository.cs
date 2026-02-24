@@ -2,11 +2,13 @@
 using Core.Interfaces;
 using Domain;
 using Domain.Entities.Base;
+using Domain.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Repositories;
 
-public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapper mapper) :
+public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapper mapper, IImageService imageService) :
     IGenericRepository<TEntity, TKey>
     where TEntity : class, IEntity<TKey>, new()
 {
@@ -68,13 +70,13 @@ public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapp
 
     public async Task<int> SaveChangesAsync() => await context.SaveChangesAsync();
 
-    //protected async Task ReplaceImageAsync(IHasImage entity, IFormFile? newFile)
-    //{
-    //    if (imageService == null || newFile == null) return;
+    protected async Task ReplaceImageAsync(IHasImage entity, IFormFile? newFile)
+    {
+        if (imageService == null || newFile == null) return;
 
-    //    if (!string.IsNullOrEmpty(entity.ImageUrl))
-    //        await imageService.DeleteImageAsync(entity.ImageUrl);
+        if (!string.IsNullOrEmpty(entity.Image))
+            await imageService.DeleteImageAsync(entity.Image);
 
-    //    entity.ImageUrl = await imageService.SaveImageAsync(newFile);
-    //}
+        entity.Image = await imageService.SaveImageAsync(newFile);
+    }
 }

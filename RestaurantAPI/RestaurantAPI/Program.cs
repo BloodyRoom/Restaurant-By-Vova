@@ -8,6 +8,7 @@ using Domain.Entities.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using System.Text;
@@ -87,7 +88,7 @@ builder.Services
     });
 
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
-
+builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
 builder.Services.AddAutoMapper(typeof(AccountMapper));
@@ -112,5 +113,15 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+var dir = builder.Configuration["ImagesDir"];
+string path = Path.Combine(Directory.GetCurrentDirectory(), dir);
+Directory.CreateDirectory(path);
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(path),
+    RequestPath = $"/{dir}"
+});
 
 app.Run();
