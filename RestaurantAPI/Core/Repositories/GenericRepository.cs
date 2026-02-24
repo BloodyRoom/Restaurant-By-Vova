@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Core.Interfaces;
 using Domain;
 using Domain.Entities.Base;
@@ -25,6 +26,17 @@ public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapp
             .OrderBy(e => e.Id)
             .ToListAsync();
     }
+
+    public async Task<IReadOnlyList<TTo>> ListAllAsync<TTo>()
+    {
+        return await context.Set<TEntity>()
+            .Where(e => !e.IsDeleted)
+            .OrderBy(e => e.Id)
+            .ProjectTo<TTo>(mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+
+
 
     public async Task<IReadOnlyList<TEntity>> ListAsync(ISpecification<TEntity> spec)
     {
