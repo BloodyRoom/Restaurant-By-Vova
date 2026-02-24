@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Models.Categories;
 using Core.Models.Products;
 using Domain.Entities;
 using System;
@@ -11,7 +12,8 @@ public class ProductMapper : Profile
 {
     public ProductMapper()
     {
-        CreateMap<ProductEntity, ProductModel>()
-            .ForMember(x => x.Category, opt => opt.MapFrom(x => x.Category));
+        CreateMap<ProductEntity, ProductModel>();
+        CreateMap<ProductCreateModel, ProductEntity>()
+            .ForMember(x => x.Image, opt => opt.Ignore());
     }
 }

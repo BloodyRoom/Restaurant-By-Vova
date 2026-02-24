@@ -16,6 +16,9 @@ public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapp
     public async Task<TEntity?> GetByIdAsync(TKey id, bool isDelete = false)
     {
         var entity = await context.Set<TEntity>().FindAsync(id);
+
+        if (entity == null) return null;
+
         return entity!.IsDeleted == isDelete ? entity : null;
     }
 
