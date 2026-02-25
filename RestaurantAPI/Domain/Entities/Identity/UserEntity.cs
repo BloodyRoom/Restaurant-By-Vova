@@ -10,4 +10,5 @@ public class UserEntity : IdentityUser<long>
 
     public virtual ICollection<UserRoleEntity>? UserRoles { get; set; }
     public virtual ICollection<UserLoginEntity>? UserLogins { get; set; }
+    public ICollection<CartEntity> Carts { get; set; } = new List<CartEntity>();
 }
