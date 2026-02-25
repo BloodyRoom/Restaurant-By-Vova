@@ -13,6 +13,7 @@ public class CartMapper : Profile
     public CartMapper()
     {
         CreateMap<CartEntity, CartModel>();
+        CreateMap<CartCreateModel, CartEntity>();
     }
 
 }
