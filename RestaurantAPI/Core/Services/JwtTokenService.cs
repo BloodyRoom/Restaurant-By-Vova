@@ -16,10 +16,13 @@ UserManager<UserEntity> userManager) : IJwtTokenService
 {
     public async Task<string> CreateTokenAsync(UserEntity user)
     {
-        var key = configuration["Jwt:Key"];
+        var key = configuration["Jwt:Key"] ?? "";
+        var issuer = configuration["Jwt:Issuer"];
+        var audience = configuration["Jwt:Audience"];
 
         var claims = new List<Claim>
         {
+            new Claim("id", user.Id.ToString()),
             new Claim("email", user.Email),
             new Claim("name", $"{user.LastName} {user.FirstName}")
         };
@@ -40,6 +43,8 @@ UserManager<UserEntity> userManager) : IJwtTokenService
 
         
         var jwtSecurityToken = new JwtSecurityToken(
+            issuer: issuer,
+            audience: audience,
             claims: claims, //список параметрів у токені, які є доступні
             expires: DateTime.UtcNow.AddDays(7), // термін дії токена - після цього часу токен буде недійсний
             signingCredentials: signingCredentials);
