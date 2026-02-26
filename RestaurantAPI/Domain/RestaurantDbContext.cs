@@ -1,10 +1,13 @@
-﻿using Domain.Entities;
+﻿using Core.Constants;
+using Domain.Entities;
+using Domain.Entities.Delivery;
 using Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Text;
 
 namespace Domain;
@@ -19,6 +22,8 @@ public class RestaurantDbContext : IdentityDbContext<UserEntity, RoleEntity, lon
     public DbSet<CategoryEntity> Categories { get; set; }
     public DbSet<ProductEntity> Products { get; set; }
     public DbSet<CartEntity> Carts { get; set; }
+    public DbSet<DeliveryEntity> Delivery { get; set; }
+    public DbSet<DeliveryProductEntity> DeliveryProducts { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -44,5 +49,24 @@ public class RestaurantDbContext : IdentityDbContext<UserEntity, RoleEntity, lon
                 .HasForeignKey(l => l.UserId)
                 .IsRequired();
         });
+
+
+
+        builder.Entity<DeliveryProductEntity>()
+            .HasKey(dp => new { dp.DeliveryId, dp.ProductId });
+
+        builder.Entity<DeliveryProductEntity>()
+            .HasOne(dp => dp.Delivery)
+            .WithMany(d => d.DeliveryProducts)
+            .HasForeignKey(dp => dp.DeliveryId);
+
+        builder.Entity<DeliveryProductEntity>()
+            .HasOne(dp => dp.Product)
+            .WithMany(p => p.DeliveryProducts)
+            .HasForeignKey(dp => dp.ProductId);
+
+        builder.Entity<DeliveryEntity>()
+            .Property(d => d.Status)
+            .HasConversion<string>();
     }
 }
