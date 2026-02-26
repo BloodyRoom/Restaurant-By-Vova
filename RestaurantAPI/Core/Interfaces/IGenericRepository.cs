@@ -7,6 +7,7 @@ public interface IGenericRepository<TEntity, TKey>
 {
     Task<TEntity?> GetByIdAsync(TKey id, bool isDelete = false);
     Task<IReadOnlyList<TEntity>> ListAllAsync();
+    Task<IReadOnlyList<TTo>> ListAllAsync<TTo>();
     Task<IReadOnlyList<TEntity>> ListAsync(ISpecification<TEntity> spec);
     Task AddAsync(TEntity entity);
     Task UpdateAsync(TEntity entity);
