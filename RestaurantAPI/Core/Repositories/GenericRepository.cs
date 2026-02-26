@@ -6,6 +6,7 @@ using Domain.Entities.Base;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Core.Repositories;
 
@@ -34,6 +35,33 @@ public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapp
     {
         return await context.Set<TEntity>()
             .Where(e => !e.IsDeleted)
+            .OrderBy(e => e.Id)
+            .ProjectTo<TTo>(mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+
+    public async Task<IReadOnlyList<TEntity>> ListAllAsync(Expression<Func<TEntity, bool>>? predicate = null)
+    {
+        var query = context.Set<TEntity>()
+            .Where(e => !e.IsDeleted);
+
+        if (predicate != null)
+            query = query.Where(predicate);
+
+        return await query
+            .OrderBy(e => e.Id)
+            .ToListAsync();
+    }
+
+    public async Task<IReadOnlyList<TTo>> ListAllAsync<TTo>(Expression<Func<TEntity, bool>>? predicate = null)
+    {
+        var query = context.Set<TEntity>()
+            .Where(e => !e.IsDeleted);
+
+        if (predicate != null)
+            query = query.Where(predicate);
+
+        return await query
             .OrderBy(e => e.Id)
             .ProjectTo<TTo>(mapper.ConfigurationProvider)
             .ToListAsync();

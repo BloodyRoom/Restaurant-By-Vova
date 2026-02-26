@@ -23,4 +23,6 @@ public class ProductEntity : BaseEntity<long>, IHasImage
     [ForeignKey(nameof(Category))]
     public long CategoryId { get; set; }
     public CategoryEntity Category { get; set; } = null!;
+
+    public ICollection<CartEntity> Carts { get; set; } = new List<CartEntity>();
 }
