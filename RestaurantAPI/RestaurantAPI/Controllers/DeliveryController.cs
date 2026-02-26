@@ -47,4 +47,9 @@ public class DeliveryController(IMediator mediator) : Controller
 
         return Ok(result.Value);
     }
+
+
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromBody] DeliveryDeleteModel model)
+        => Ok(await mediator.Send(new DeliveryDeleteCommand(model)));
 }
