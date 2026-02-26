@@ -7,6 +7,7 @@ public interface IGenericRepository<TEntity, TKey>
     where TEntity : class, IEntity<TKey>, new()
 {
     Task<TEntity?> GetByIdAsync(TKey id, bool isDelete = false);
+    Task<TTo?> GetByIdAsync<TTo>(TKey id, bool isDelete = false);
     Task<IReadOnlyList<TEntity>> ListAllAsync();
     Task<IReadOnlyList<TTo>> ListAllAsync<TTo>();
     Task<IReadOnlyList<TEntity>> ListAllAsync(Expression<Func<TEntity, bool>>? predicate = null);

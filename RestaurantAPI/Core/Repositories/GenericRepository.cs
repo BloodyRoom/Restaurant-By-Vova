@@ -23,6 +23,19 @@ public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapp
         return entity!.IsDeleted == isDelete ? entity : null;
     }
 
+    public async Task<TTo?> GetByIdAsync<TTo>(TKey id, bool isDelete = false)
+    {
+        var entity = await context.Set<TEntity>()
+            .Where(x => x.Id!.Equals(id) && x.IsDeleted == isDelete)
+            .ProjectTo<TTo>(mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync();
+
+        return entity;
+    }
+
+
+
+
     public async Task<IReadOnlyList<TEntity>> ListAllAsync()
     {
         return await context.Set<TEntity>()

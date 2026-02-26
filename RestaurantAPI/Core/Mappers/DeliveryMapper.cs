@@ -15,13 +15,20 @@ public class DeliveryMapper : Profile
     public DeliveryMapper()
     {
         CreateMap<DeliveryEntity, DeliveryModel>()
-            .ForMember(x => x.Products,
-                opt => opt.MapFrom(x => x.DeliveryProducts
-                    .Select(x => x.Product)));
+            .ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.DeliveryProducts));
 
         CreateMap<DeliveryEntity, DeliveryWithUserModel>()
-            .ForMember(x => x.Products, opt => opt.MapFrom(x => x.DeliveryProducts.Select(x => x.Product)))
+            .ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.DeliveryProducts))
             .ForMember(x => x.User, opt => opt.MapFrom(x => x.User));
+
+        CreateMap<DeliveryProductEntity, DeliveryProductModel>()
+            .ForMember(dest => dest.Product,
+                opt => opt.MapFrom(src => src.Product))
+            .ForMember(dest => dest.Count,
+                opt => opt.MapFrom(src => src.Count));
+
+
+        CreateMap<DeliveryCreateModel, DeliveryEntity>();
     }
 
 }

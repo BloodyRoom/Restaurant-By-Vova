@@ -1,4 +1,4 @@
-﻿namespace Core.Constants
+﻿namespace Domain.Enums
 {
     public enum DeliveryStatus
     {

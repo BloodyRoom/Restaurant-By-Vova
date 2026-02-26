@@ -1,4 +1,8 @@
-﻿using Core.Helpers;
+﻿using Core.Commands.Carts;
+using Core.Commands.Delivery;
+using Core.Helpers;
+using Core.Models.Carts;
+using Core.Models.Delivery;
 using Core.Queries.Carts;
 using Core.Queries.Delivery;
 using MediatR;
@@ -20,4 +24,16 @@ public class DeliveryController(IMediator mediator) : Controller
     [HttpGet]
     public async Task<IActionResult> GetAll()
     => Ok(await mediator.Send(new GetAllDeliveryQuery()));
+
+
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> Create([FromBody] DeliveryCreateModel model)
+    {
+        var result = await mediator.Send(new DeliveryCreateCommand(model, User.GetUserId()));
+
+        if (!result.IsSuccess) return BadRequest(result.Error);
+
+        return Ok(result.Value);
+    }
 }

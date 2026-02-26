@@ -1,6 +1,6 @@
-﻿using Core.Constants;
-using Domain.Entities.Base;
+﻿using Domain.Entities.Base;
 using Domain.Entities.Identity;
+using Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities.Delivery;

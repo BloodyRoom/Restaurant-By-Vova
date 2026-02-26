@@ -1,5 +1,4 @@
-﻿using Core.Constants;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Entities.Delivery;
 using Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;

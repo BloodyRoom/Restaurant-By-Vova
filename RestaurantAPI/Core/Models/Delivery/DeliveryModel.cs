@@ -11,5 +11,5 @@ public class DeliveryModel
     public long Id { get; set; }
     public string Status { get; set; } = string.Empty;
     public string Address { get; set; } = string.Empty;
-    public ICollection<ProductModel> Products { get; set; } = new List<ProductModel>();
+    public List<DeliveryProductModel> Products { get; set; } = new();
 }
