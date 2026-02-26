@@ -36,4 +36,15 @@ public class DeliveryController(IMediator mediator) : Controller
 
         return Ok(result.Value);
     }
+
+
+    [HttpPatch]
+    public async Task<IActionResult> Update([FromBody] DeliveryUpdateModel model)
+    {
+        var result = await mediator.Send(new DeliveryUpdateCommand(model));
+
+        if (!result.IsSuccess) return BadRequest(result.Error);
+
+        return Ok(result.Value);
+    }
 }
