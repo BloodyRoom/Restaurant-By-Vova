@@ -22,6 +22,7 @@ public class DeliveryController(IMediator mediator) : Controller
     => Ok(await mediator.Send(new GetDeliveryQuery(User.GetUserId())));
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetAll()
     => Ok(await mediator.Send(new GetAllDeliveryQuery()));
 
@@ -39,6 +40,7 @@ public class DeliveryController(IMediator mediator) : Controller
 
 
     [HttpPatch]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update([FromBody] DeliveryUpdateModel model)
     {
         var result = await mediator.Send(new DeliveryUpdateCommand(model));
@@ -50,6 +52,7 @@ public class DeliveryController(IMediator mediator) : Controller
 
 
     [HttpDelete]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete([FromBody] DeliveryDeleteModel model)
         => Ok(await mediator.Send(new DeliveryDeleteCommand(model)));
 }

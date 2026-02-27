@@ -4,6 +4,7 @@ using Core.Models.Categories;
 using Core.Models.Products;
 using Core.Queries.Products;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RestaurantAPI.Controllers;
@@ -17,6 +18,7 @@ public class ProductsController(IMediator mediator) : Controller
         => Ok(await mediator.Send(new GetProductsQuery()));
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> Create([FromForm] ProductCreateModel model)
     {
@@ -28,6 +30,7 @@ public class ProductsController(IMediator mediator) : Controller
     }
 
     [HttpPatch]
+    [Authorize(Roles = "Admin")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> Update([FromForm] ProductUpdateModel model)
     {
@@ -39,6 +42,7 @@ public class ProductsController(IMediator mediator) : Controller
     }
 
     [HttpDelete]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete([FromBody] ProductDeleteModel model)
         => Ok(await mediator.Send(new ProductDeleteCommand(model)));
 }
