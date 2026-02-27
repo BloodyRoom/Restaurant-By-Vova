@@ -1,33 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {Button, Card, Input} from "./components/ui";
+import {Navbar} from "./components/ui/Navbar";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+        <div className="flex flex-col gap-3">
+            <div className="flex gap-3">
+                <Button variant={"primary"} size={"lg"}>кнопка1</Button>
+                <Button variant={"primary-link"} size={"lg"}>кнопка2</Button>
+                <Button variant={"secondary"} size={"lg"}>кнопка3</Button>
+                <Button variant={"secondary-link"} size={"lg"}>кнопка4</Button>
+            </div>
+
+            <div className="flex gap-3">
+                <Button variant={"primary"} size={"md"}>кнопка1</Button>
+                <Button variant={"primary-link"} size={"md"}>кнопка2</Button>
+                <Button variant={"secondary"} size={"md"}>кнопка3</Button>
+                <Button variant={"secondary-link"} size={"md"}>кнопка4</Button>
+            </div>
+
+            <div className="flex gap-3">
+                <Button variant={"primary"} size={"sm"}>кнопка1</Button>
+                <Button variant={"primary-link"} size={"sm"}>кнопка2</Button>
+                <Button variant={"secondary"} size={"sm"}>кнопка3</Button>
+                <Button variant={"secondary-link"} size={"sm"}>кнопка4</Button>
+            </div>
+        </div>
+
+        <div className={"p-4"}>
+            <Card image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoFl-t4AKV1-EkKxk1uCkG8oXszb8p_dyNog&s"}>asd</Card>
+        </div>
+
+        <div className={"p-4 w-[400px]"}>
+            <Input label={"Input"} error={"hahaha"}/>
+        </div>
+
+        <Navbar />
     </>
   )
 }
