@@ -4,6 +4,7 @@ using Core.Queries.Categories;
 using Core.Repositories;
 using Core.Services;
 using Domain;
+using Domain.Data;
 using Domain.Entities.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -99,8 +100,6 @@ builder.Services.AddAutoMapper(typeof(AccountMapper));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCategoriesQuery).Assembly));
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -112,6 +111,18 @@ if (app.Environment.IsDevelopment())
         opt.SwaggerEndpoint("/openapi/v1.json", "api");
     });
 }
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var userManager = services.GetRequiredService<UserManager<UserEntity>>();
+    var roleManager = services.GetRequiredService<RoleManager<RoleEntity>>();
+    var configuration = services.GetRequiredService<IConfiguration>();
+
+    await SeedAdmin.SeedAsync(userManager, roleManager, configuration);
+}
+
 
 app.UseAuthentication();
 app.UseAuthorization();

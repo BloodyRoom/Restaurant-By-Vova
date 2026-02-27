@@ -2,6 +2,7 @@
 using Core.Models.Categories;
 using Core.Queries.Categories;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RestaurantAPI.Controllers;
@@ -11,15 +12,18 @@ namespace RestaurantAPI.Controllers;
 public class CategoriesController(IMediator mediator) : Controller
 {
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get()
         => Ok(await mediator.Send(new GetCategoriesQuery()));
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> Create([FromForm] CategoryCreateModel model)
         => Ok(await mediator.Send(new CategoryCreateCommand(model)));
 
     [HttpPatch]
+    [Authorize(Roles = "Admin")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> Update([FromForm] CategoryUpdateModel model)
     {
@@ -31,6 +35,7 @@ public class CategoriesController(IMediator mediator) : Controller
     }
 
     [HttpDelete]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete([FromBody] CategoryDeleteModel model)
         => Ok(await mediator.Send(new CategoryDeleteCommand(model)));
 }
