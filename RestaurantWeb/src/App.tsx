@@ -1,11 +1,29 @@
 import './App.css'
 import {Button, Card, Input} from "./components/ui";
 import {Navbar} from "./components/ui/Navbar";
-import {useGetProductsQuery} from "./services/apiProduct";
+import {useLoginMutation} from "./services/apiAccount";
+import {useEffect} from "react";
+import {IAccountLogin} from "./types/account/IAccountLogin";
+import {useAppDispatch} from "./store";
+import {login} from "./store/authSlice";
 
 function App() {
 
-    const {data: products} = useGetProductsQuery();
+    const [loginRequest] = useLoginMutation();
+    const dispatch = useAppDispatch();
+
+    const test = async () => {
+        const user: IAccountLogin = {
+            email: "admin@gmail.com",
+            password: "123123",
+        }
+        const result = await loginRequest(user).unwrap();
+        dispatch(login(result.accessToken));
+    }
+
+    useEffect(() => {
+        test();
+    }, [])
 
   return (
     <>
@@ -41,8 +59,6 @@ function App() {
         </div>
 
         <Navbar />
-
-        {JSON.stringify(products)}
     </>
   )
 }

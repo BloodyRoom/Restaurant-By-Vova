@@ -1,3 +1,3 @@
 export interface IAccountResponse {
-    token: string
+    accessToken: string
 }

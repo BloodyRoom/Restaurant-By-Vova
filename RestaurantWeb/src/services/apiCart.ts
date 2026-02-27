@@ -2,7 +2,6 @@ import {createApi} from "@reduxjs/toolkit/query/react";
 import {serverBaseQuery} from "../utils/fetchBaseQuery";
 import {ICart} from "../types/cart/ICart";
 import {ICartCreate} from "../types/cart/ICartCreate";
-import {serialize} from "object-to-formdata";
 import {ICartUpdate} from "../types/cart/ICartUpdate";
 
 export const apiCart = createApi({
@@ -10,14 +9,14 @@ export const apiCart = createApi({
     baseQuery: serverBaseQuery("carts"),
     tagTypes: ['Carts'],
     endpoints: (builder) => ({
-        getProducts: builder.query<ICart[], void>({
+        getCarts: builder.query<ICart[], void>({
             query: () => ({
                 url: "get",
                 method: "GET"
             }),
             providesTags: ['Carts']
         }),
-        productCreate: builder.mutation<ICart | null, ICartCreate>({
+        cartCreate: builder.mutation<ICart | null, ICartCreate>({
             query: (model) => {
                 try {
                     return {
@@ -31,7 +30,7 @@ export const apiCart = createApi({
             },
             invalidatesTags: ["Carts"]
         }),
-        productUpdate: builder.mutation<ICart | null, ICartUpdate>({
+        cartUpdate: builder.mutation<ICart | null, ICartUpdate>({
             query: (model) => {
                 try {
                     return {
@@ -45,7 +44,7 @@ export const apiCart = createApi({
             },
             invalidatesTags: ["Carts"]
         }),
-        productDelete: builder.mutation<boolean, number>({
+        cartDelete: builder.mutation<boolean, number>({
             query: (id) => {
                 return {
                     url: `delete`,
@@ -59,6 +58,8 @@ export const apiCart = createApi({
 })
 
 export const {
-    useGetProductsQuery,
-    useProductCreateMutation,
+    useGetCartsQuery,
+    useCartCreateMutation,
+    useCartUpdateMutation,
+    useCartDeleteMutation
 } = apiCart;
