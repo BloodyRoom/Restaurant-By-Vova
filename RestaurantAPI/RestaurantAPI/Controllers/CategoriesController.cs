@@ -12,7 +12,6 @@ namespace RestaurantAPI.Controllers;
 public class CategoriesController(IMediator mediator) : Controller
 {
     [HttpGet]
-    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get()
         => Ok(await mediator.Send(new GetCategoriesQuery()));
 

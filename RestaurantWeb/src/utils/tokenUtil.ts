@@ -26,3 +26,8 @@ export function getUserInfo(): IAccount | null {
     user.roles = roles;
     return user;
 }
+
+export function getToken(): string | null {
+    const token = localStorage.getItem("token");
+    return token;
+}
