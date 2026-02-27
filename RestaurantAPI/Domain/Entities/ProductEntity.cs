@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Base;
+using Domain.Entities.Delivery;
 using Domain.Entities.Identity;
 using Domain.Interfaces;
 using System;
@@ -25,4 +26,5 @@ public class ProductEntity : BaseEntity<long>, IHasImage
     public CategoryEntity Category { get; set; } = null!;
 
     public ICollection<CartEntity> Carts { get; set; } = new List<CartEntity>();
+    public ICollection<DeliveryProductEntity> DeliveryProducts { get; set; } = new List<DeliveryProductEntity>();
 }

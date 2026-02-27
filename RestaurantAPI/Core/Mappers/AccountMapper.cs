@@ -10,6 +10,9 @@ public class AccountMapper : Profile
     {
         CreateMap<RegisterModel, UserEntity>()
             .ForMember(opt => opt.UserName, opt => opt.MapFrom(x => x.Email));
+
+        CreateMap<UserEntity, UserModel>()
+            .ForMember(x => x.FullName, opt => opt.MapFrom(x => $"{x.FirstName} {x.LastName}"));
     }
 
 }

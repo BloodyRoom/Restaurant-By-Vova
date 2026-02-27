@@ -23,6 +23,19 @@ public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapp
         return entity!.IsDeleted == isDelete ? entity : null;
     }
 
+    public async Task<TTo?> GetByIdAsync<TTo>(TKey id, bool isDelete = false)
+    {
+        var entity = await context.Set<TEntity>()
+            .Where(x => x.Id!.Equals(id) && x.IsDeleted == isDelete)
+            .ProjectTo<TTo>(mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync();
+
+        return entity;
+    }
+
+
+
+
     public async Task<IReadOnlyList<TEntity>> ListAllAsync()
     {
         return await context.Set<TEntity>()
@@ -69,6 +82,7 @@ public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapp
 
 
 
+
     public async Task<IReadOnlyList<TEntity>> ListAsync(ISpecification<TEntity> spec)
     {
         if (spec == null) throw new ArgumentNullException(nameof(spec));
@@ -94,6 +108,9 @@ public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapp
         await context.Set<TEntity>().AddAsync(entity);
     }
 
+
+
+
     public async Task UpdateAsync(TEntity entity)
     {
         if (entity == null) throw new ArgumentNullException(nameof(entity));
@@ -101,6 +118,9 @@ public class GenericRepository<TEntity, TKey>(RestaurantDbContext context, IMapp
         context.Set<TEntity>().Update(entity);
         await context.SaveChangesAsync();
     }
+
+
+
 
     public async Task DeleteAsync(TKey id)
     {
