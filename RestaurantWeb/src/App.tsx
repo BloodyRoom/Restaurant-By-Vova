@@ -1,8 +1,11 @@
 import './App.css'
 import {Button, Card, Input} from "./components/ui";
 import {Navbar} from "./components/ui/Navbar";
+import {useGetProductsQuery} from "./services/apiProduct";
 
 function App() {
+
+    const {data: products} = useGetProductsQuery();
 
   return (
     <>
@@ -38,6 +41,8 @@ function App() {
         </div>
 
         <Navbar />
+
+        {JSON.stringify(products)}
     </>
   )
 }
