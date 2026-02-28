@@ -1,7 +1,7 @@
 import { Button, Card, Input } from "../components/ui"
 import { Navbar } from "../components/ui/Navbar"
 
-const Layout = () => {
+const IndexPage = () => {
   return (
     <>
       <div className="flex flex-col gap-3">
@@ -38,4 +38,4 @@ const Layout = () => {
   )
 }
 
-export default Layout
+export default IndexPage;
