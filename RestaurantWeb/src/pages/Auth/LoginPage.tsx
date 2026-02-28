@@ -36,9 +36,9 @@ const LoginPage = () => {
   return (
     <form onSubmit={handleSubmit} className="w-2/4 mx-auto mt-20">
       <div className="flex flex-col gap-3">
-        <Input label={"Email"} error={""} name="email" />
-        <Input label={"Password"} error={""} name="password" type="password" />
-        <Button variant={"primary"} size={"lg"}>Login</Button>
+        <Input label={"E-mail"} error={""} name="email" />
+        <Input label={"Пароль"} error={""} name="password" type="password" />
+        <Button variant={"primary"} size={"lg"} className="self-center">Увійти</Button>
       </div>
     </form>
   )
