@@ -1,0 +1,18 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+const API_URL = import.meta.env.VITE_API_URL;
+const API_IMAGE_URL = `${API_URL}/images/`;
+const API_IMAGE_SMALL_URL = `${API_IMAGE_URL}200_`;
+const API_IMAGE_MEDIUM_URL = `${API_IMAGE_URL}600_`;
+const API_IMAGE_LARGE_URL = `${API_IMAGE_URL}1200_`;
+
+
+const APP_ENV = {
+    API_URL,
+    API_IMAGE_URL,
+    API_IMAGE_SMALL_URL,
+    API_IMAGE_MEDIUM_URL,
+    API_IMAGE_LARGE_URL,
+}
+
+export default APP_ENV;
