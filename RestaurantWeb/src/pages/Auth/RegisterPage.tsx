@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Input, Button } from "../../components/ui"
+import { useRegisterMutation } from "../../services/apiAccount";
+import { useAppDispatch } from "../../store";
+import { login } from "../../store/authSlice";
+import { IAccountRegister } from "../../types/account/IAccountRegister";
 
 const RegisterPage = () => {
     const navigator = useNavigate();
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
+    const [registerRequest] = useRegisterMutation();
+    const dispatch = useAppDispatch();
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const password = formData.get("password");
@@ -23,18 +29,17 @@ const RegisterPage = () => {
 
         setConfirmPasswordError("");
 
-        const data = {
-            email: formData.get("email"),
-            firstName: formData.get("firstName"),
-            lastName: formData.get("lastName"),
-            password,
+        const data: IAccountRegister = {
+            email: formData.get("email") as string,
+            firstName: formData.get("firstName") as string,
+            lastName: formData.get("lastName") as string,
+            password: password as string,
         };
-        console.log(data);
         try {
-            // тут queryRTK
+            await registerRequest(data).unwrap();
             navigator("/")
         } catch (error) {
-
+            alert("Registration failed. Please check your credentials and try again.");
         }
     }
 

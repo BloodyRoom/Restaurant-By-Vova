@@ -1,24 +1,34 @@
 import React from "react";
 import { Button, Input } from "../../components/ui"
 import { useNavigate } from "react-router";
+import { IAccountLogin } from "../../types/account/IAccountLogin";
+import { useLoginMutation } from "../../services/apiAccount";
+import { useAppDispatch } from "../../store";
+import { login } from "../../store/authSlice";
 
 
 
 const LoginPage = () => {
   const navigator = useNavigate();
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
+  const [loginRequest] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const data = {
-      login: formData.get("login"),
-      password: formData.get("password"),
+    if (!formData.get("email") || !formData.get("password")) {
+      alert("Please fill in all fields");
+      return;
+    }
+    const data: IAccountLogin = {
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
     };
-    console.log(data);
     try {
-      // тут queryRTK
+      const result = await loginRequest(data).unwrap();
+      dispatch(login(result.accessToken));
       navigator("/")
     } catch (error) {
-
+      alert("Login failed. Please check your credentials and try again.");
     }
 
   }
@@ -26,7 +36,7 @@ const LoginPage = () => {
   return (
     <form onSubmit={handleSubmit} className="w-2/4 mx-auto mt-20">
       <div className="flex flex-col gap-3">
-        <Input label={"Login"} error={""} name="login" />
+        <Input label={"Email"} error={""} name="email" />
         <Input label={"Password"} error={""} name="password" type="password" />
         <Button variant={"primary"} size={"lg"}>Login</Button>
       </div>
