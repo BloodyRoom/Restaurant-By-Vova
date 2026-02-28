@@ -46,12 +46,12 @@ const RegisterPage = () => {
     return (
         <form onSubmit={handleSubmit} className="w-2/4 mx-auto mt-20">
             <div className="flex flex-col gap-3">
-                <Input label={"Email"} error={""} name="email" type="email" />
-                <Input label={"First Name"} error={""} name="firstName" />
-                <Input label={"Last Name"} error={""} name="lastName" />
-                <Input label={"Password"} error={""} name="password" type="password" />
-                <Input label={"Confirm Password"} error={confirmPasswordError} name="confirmPassword" type="password" />
-                <Button variant={"primary"} size={"lg"}>Register</Button>
+                <Input label={"E-mail"} error={""} name="email" type="email" />
+                <Input label={"Ім'я"} error={""} name="firstName" />
+                <Input label={"Прізвище"} error={""} name="lastName" />
+                <Input label={"Пароль"} error={""} name="password" type="password" />
+                <Input label={"Підтвердежння паролю"} error={confirmPasswordError} name="confirmPassword" type="password" />
+                <Button variant={"primary"} size={"lg"} className="self-center">Зареєструватися</Button>
             </div>
         </form>
     )
