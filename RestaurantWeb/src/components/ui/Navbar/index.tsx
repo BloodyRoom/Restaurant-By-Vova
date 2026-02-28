@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Button } from "../index";
+import { Link } from "react-router";
 
 export const Navbar = () => {
     return (
@@ -37,7 +38,9 @@ export const Navbar = () => {
 
                     <div className="flex items-center gap-3">
                         <Button variant="none" size="md">
-                            Вхід
+                            <Link to="/auth/login">
+                                Вхід
+                            </Link>
                         </Button>
 
                         <Button variant="primary" size="md">
