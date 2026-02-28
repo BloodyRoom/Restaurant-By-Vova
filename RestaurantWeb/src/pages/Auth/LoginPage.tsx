@@ -27,7 +27,7 @@ const LoginPage = () => {
     <form onSubmit={handleSubmit} className="w-2/4 mx-auto mt-20">
       <div className="flex flex-col gap-3">
         <Input label={"Login"} error={""} name="login" />
-        <Input label={"Password"} error={""} name="password" />
+        <Input label={"Password"} error={""} name="password" type="password" />
         <Button variant={"primary"} size={"lg"}>Login</Button>
       </div>
     </form>
