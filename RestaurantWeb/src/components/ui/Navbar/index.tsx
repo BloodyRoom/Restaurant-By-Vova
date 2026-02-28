@@ -1,7 +1,9 @@
 import clsx from "clsx";
 import { Button } from "../index";
+import { Link, useNavigate } from "react-router";
 
 export const Navbar = () => {
+    const navigator = useNavigate();
     return (
         <div className="w-full flex justify-center pt-6">
             <div className="w-[95%] max-w-6xl relative">
@@ -36,11 +38,11 @@ export const Navbar = () => {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <Button variant="none" size="md">
+                        <Button onClick={() => navigator("/auth/login")} variant="none" size="md">
                             Вхід
                         </Button>
 
-                        <Button variant="primary" size="md">
+                        <Button onClick={() => navigator("/auth/register")} variant="primary" size="md">
                             Реєстрація
                         </Button>
                     </div>
