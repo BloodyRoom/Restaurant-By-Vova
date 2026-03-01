@@ -8,5 +8,5 @@ namespace Core.Models.Delivery;
 public class DeliveryUpdateModel
 {
     public long Id { get; set; }
-    public DeliveryStatus Status { get; set; }
+    public string Status { get; set; } = string.Empty;
 }

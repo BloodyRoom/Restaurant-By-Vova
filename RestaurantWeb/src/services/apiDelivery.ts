@@ -27,9 +27,6 @@ export const apiDelivery = createApi({
         }),
         deliveryCreate: builder.mutation<IDelivery | null, IDeliveryCreate>({
             query: (model) => {
-                const user = getUserInfo();
-                if (user == null || !user.roles.includes("Admin")) throw new Error("Forbidden");
-
                 try {
                     return {
                         method: "POST",
