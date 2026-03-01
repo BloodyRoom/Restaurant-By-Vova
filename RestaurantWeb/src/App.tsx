@@ -4,6 +4,7 @@ import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
 import MainLayout from "./components/layouts/MainLayout";
+import MenuPage from "./pages/MenuPage";
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
             <Routes>
                 <Route path={"/"} element={<MainLayout/>}>
                     <Route index element={<IndexPage />} />
+                    <Route path={"/menu"} element={<MenuPage />} />
                     <Route path="/auth/login" element={<LoginPage />} />
                     <Route path="/auth/register" element={<RegisterPage />} />
                 </Route>
