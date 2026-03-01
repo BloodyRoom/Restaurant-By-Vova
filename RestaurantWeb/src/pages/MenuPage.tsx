@@ -77,13 +77,13 @@ const MenuPage = () => {
     return (
         <>
             <div className="w-full h-[30vh] flex justify-center relative">
-                <div className="z-10 flex justify-center items-center flex-col w-[1000px] h-full pt-25 gap-6">
+                <div className="flex justify-center items-center flex-col w-[1000px] h-full pt-25 gap-6">
                     <h1 className="text-[64px] font-bold w-1/2 text-white text-center leading-15">
                         Меню
                     </h1>
                 </div>
 
-                <div className="w-full h-[30%] absolute z-0 top-0">
+                <div className="w-full h-[100%] absolute z-0 top-0">
                     <img
                         src="/bg.png"
                         alt=""

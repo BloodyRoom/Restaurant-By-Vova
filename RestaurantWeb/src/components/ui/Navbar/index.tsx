@@ -1,9 +1,13 @@
 import clsx from "clsx";
 import { Button } from "../index";
 import { useNavigate } from "react-router";
+import {getUserInfo} from "../../../utils/tokenUtil";
 
 export const Navbar = () => {
     const navigator = useNavigate();
+
+    const user = getUserInfo();
+
     return (
         <div className="w-full flex justify-center fixed z-10 top-6">
             <div className="w-[95%] max-w-6xl relative">
@@ -23,7 +27,7 @@ export const Navbar = () => {
                                 "flex items-center gap-1 overflow-hidden transition-all duration-300", "opacity-100 max-w-[500px]"
                             )}
                         >
-                            <Button variant="secondary-link" className={"rounded-l-3xl rounded-r-lg"} size="sm">
+                            <Button  onClick={() => navigator("/menu")} variant="secondary-link" className={"rounded-l-3xl rounded-r-lg"} size="sm">
                                 Меню
                             </Button>
 
@@ -38,13 +42,21 @@ export const Navbar = () => {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <Button onClick={() => navigator("/auth/login")} variant="none" size="md">
-                            Вхід
-                        </Button>
+                        {user ? (
+                            <>
+                                <p className={"text-white"}>{user.name}</p>
+                            </>
+                        ) : (
+                            <>
+                                <Button onClick={() => navigator("/auth/login")} variant="none" size="md">
+                                    Вхід
+                                </Button>
 
-                        <Button onClick={() => navigator("/auth/register")} variant="primary" size="md">
-                            Реєстрація
-                        </Button>
+                                <Button onClick={() => navigator("/auth/register")} variant="primary" size="md">
+                                    Реєстрація
+                                </Button>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
