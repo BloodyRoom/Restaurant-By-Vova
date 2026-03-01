@@ -41,7 +41,7 @@ export const Navbar = () => {
                                 Меню
                             </Button>
 
-                            <Button variant="secondary-link" className={"rounded-l-lg rounded-r-3xl"} size="sm">
+                            <Button  onClick={() => navigator("/deliveries")} variant="secondary-link" className={"rounded-l-lg rounded-r-3xl"} size="sm">
                                 Доставка
                             </Button>
                         </div>

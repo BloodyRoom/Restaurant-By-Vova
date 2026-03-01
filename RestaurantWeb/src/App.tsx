@@ -6,6 +6,8 @@ import RegisterPage from "./pages/Auth/RegisterPage";
 import MainLayout from "./components/layouts/MainLayout";
 import MenuPage from "./pages/MenuPage";
 import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import DeliveriesPage from "./pages/DeliveriesPage";
 
 function App() {
 
@@ -16,6 +18,10 @@ function App() {
                     <Route index element={<IndexPage />} />
                     <Route path={"/menu"} element={<MenuPage />} />
                     <Route path={"/cart"} element={<CartPage />} />
+                    <Route path={"/checkout"} element={<CheckoutPage />} />
+                    <Route path={"/deliveries"} element={<DeliveriesPage />} />
+
+
                     <Route path="/auth/login" element={<LoginPage />} />
                     <Route path="/auth/register" element={<RegisterPage />} />
                 </Route>
