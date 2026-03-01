@@ -3,9 +3,13 @@ import { Button } from "../index";
 import { useNavigate } from "react-router";
 import {getUserInfo} from "../../../utils/tokenUtil";
 import {useGetCartsQuery} from "../../../services/apiCart";
+import {useAppDispatch} from "../../../store";
+import {logout} from "../../../store/authSlice";
 
 export const Navbar = () => {
     const navigator = useNavigate();
+
+    const dispatch = useAppDispatch();
 
     const user = getUserInfo();
 
@@ -47,7 +51,7 @@ export const Navbar = () => {
                         </div>
                     </div>
 
-                    <div className="absolute left-1/2 -translate-x-1/2 text-white text-xl font-semibold">
+                    <div onClick={() => navigator("/")} className="cursor-pointer  left-1/2 -translate-x-1/2 text-white text-xl font-semibold">
                         У Вови
                     </div>
 
@@ -63,6 +67,17 @@ export const Navbar = () => {
                                         size="sm"
                                     >
                                         Кошик {totalItems > 0 && (<span>({totalItems})</span>)}
+                                    </Button>
+
+                                    <Button
+                                        onClick={() => {
+                                            dispatch(logout());
+                                            navigator("/");
+                                        }}
+                                        variant="secondary"
+                                        size="sm"
+                                    >
+                                        Вийти
                                     </Button>
                                 </div>
                             </>
