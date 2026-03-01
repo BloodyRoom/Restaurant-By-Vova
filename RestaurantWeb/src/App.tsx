@@ -5,6 +5,7 @@ import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
 import MainLayout from "./components/layouts/MainLayout";
 import MenuPage from "./pages/MenuPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
                 <Route path={"/"} element={<MainLayout/>}>
                     <Route index element={<IndexPage />} />
                     <Route path={"/menu"} element={<MenuPage />} />
+                    <Route path={"/cart"} element={<CartPage />} />
                     <Route path="/auth/login" element={<LoginPage />} />
                     <Route path="/auth/register" element={<RegisterPage />} />
                 </Route>

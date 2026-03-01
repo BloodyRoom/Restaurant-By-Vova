@@ -78,7 +78,7 @@ const MenuPage = () => {
         <>
             <div className="w-full h-[30vh] flex justify-center relative">
                 <div className="flex justify-center items-center flex-col w-[1000px] h-full pt-25 gap-6">
-                    <h1 className="text-[64px] font-bold w-1/2 text-white text-center leading-15">
+                    <h1 className="z-1 text-[64px] font-bold w-1/2 text-white text-center leading-15">
                         Меню
                     </h1>
                 </div>

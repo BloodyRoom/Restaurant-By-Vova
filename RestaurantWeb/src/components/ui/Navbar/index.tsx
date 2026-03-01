@@ -2,11 +2,21 @@ import clsx from "clsx";
 import { Button } from "../index";
 import { useNavigate } from "react-router";
 import {getUserInfo} from "../../../utils/tokenUtil";
+import {useGetCartsQuery} from "../../../services/apiCart";
 
 export const Navbar = () => {
     const navigator = useNavigate();
 
     const user = getUserInfo();
+
+    const { data: carts = [] } = useGetCartsQuery(undefined, {
+        skip: !user
+    });
+
+    const totalItems = carts.reduce(
+        (sum, item) => sum + item.count,
+        0
+    );
 
     return (
         <div className="w-full flex justify-center fixed z-10 top-6">
@@ -45,6 +55,16 @@ export const Navbar = () => {
                         {user ? (
                             <>
                                 <p className={"text-white"}>{user.name}</p>
+
+                                <div className="relative">
+                                    <Button
+                                        onClick={() => navigator("/cart")}
+                                        variant="none"
+                                        size="sm"
+                                    >
+                                        Кошик {totalItems > 0 && (<span>({totalItems})</span>)}
+                                    </Button>
+                                </div>
                             </>
                         ) : (
                             <>
