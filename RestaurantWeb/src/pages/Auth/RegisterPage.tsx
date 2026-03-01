@@ -44,7 +44,7 @@ const RegisterPage = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="w-2/4 mx-auto mt-20">
+        <form onSubmit={handleSubmit} className="w-2/4 mx-auto mt-40">
             <div className="flex flex-col gap-3">
                 <Input label={"E-mail"} error={""} name="email" type="email" />
                 <Input label={"Ім'я"} error={""} name="firstName" />

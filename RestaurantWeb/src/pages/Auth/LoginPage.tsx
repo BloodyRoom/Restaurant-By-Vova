@@ -34,7 +34,7 @@ const LoginPage = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-2/4 mx-auto mt-20">
+    <form onSubmit={handleSubmit} className="w-2/4 mx-auto mt-40">
       <div className="flex flex-col gap-3">
         <Input label={"E-mail"} error={""} name="email" />
         <Input label={"Пароль"} error={""} name="password" type="password" />
