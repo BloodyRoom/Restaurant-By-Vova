@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import { Button } from "../index";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 export const Navbar = () => {
     const navigator = useNavigate();
     return (
-        <div className="w-full flex justify-center pt-6">
+        <div className="w-full flex justify-center fixed z-10 top-6">
             <div className="w-[95%] max-w-6xl relative">
                 <div
                     className={clsx(

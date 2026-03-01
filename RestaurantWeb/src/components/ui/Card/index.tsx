@@ -13,7 +13,7 @@ export const Card: React.FC<CardProps> = ({image, imageAlt, children, className,
         <div
             onClick={onClick}
             className={clsx(
-                "bg-[#1E1E1E] w-[300px] rounded-3xl rounded-bl-lg p-4 transition-all duration-300",
+                "bg-[#1E1E1E] w-[370px] rounded-3xl rounded-bl-lg p-4 transition-all duration-300",
                 "hover:scale-[1.01] cursor-pointer",
                 className
             )}
@@ -22,7 +22,7 @@ export const Card: React.FC<CardProps> = ({image, imageAlt, children, className,
                 <img
                     src={image}
                     alt={imageAlt}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-55 object-cover"
                 />
             </div>
 
