@@ -13,6 +13,7 @@ import DeliveriesPage from "./pages/DeliveriesPage";
 import IndexAdminPage from "./pages/Admin/IndexAdminPage";
 import CategoryAdminPage from "./pages/Admin/Category/CategoryAdminPage";
 import ProductAdminPage from "./pages/Admin/Product/ProductAdminPage";
+import OrderAdminPage from "./pages/Admin/Delivery/DeliveryAdminPage";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                     <Route index element={<IndexAdminPage />} />
                     <Route path="categories" element={<CategoryAdminPage />} />
                     <Route path="menu" element={<ProductAdminPage />} />
+                    <Route path="orders" element={<OrderAdminPage />} />
                 </Route>
             </Routes>
         </>
