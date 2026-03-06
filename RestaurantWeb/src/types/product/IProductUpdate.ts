@@ -3,6 +3,6 @@ export interface IProductUpdate {
     name: string;
     description: string;
     price: number;
-    image?: string;
+    image?: null | File;
     categoryId: number;
 }

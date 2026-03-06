@@ -1,4 +1,4 @@
-import { Button } from "../../../components/ui";
+import { Button } from "..";
 
 const ConfirmModal = ({text, onConfirm, onClose}: any) => {
 
