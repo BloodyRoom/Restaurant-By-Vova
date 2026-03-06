@@ -4,10 +4,13 @@ import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
 import MainLayout from "./components/layouts/MainLayout";
+import AdminLayout from "./components/layouts/AdminLayout";
 import MenuPage from "./pages/MenuPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import DeliveriesPage from "./pages/DeliveriesPage";
+
+import IndexAdminPage from "./pages/Admin/IndexAdminPage";
 
 function App() {
 
@@ -24,6 +27,9 @@ function App() {
 
                     <Route path="/auth/login" element={<LoginPage />} />
                     <Route path="/auth/register" element={<RegisterPage />} />
+                </Route>
+                <Route path={"/admin"} element={<AdminLayout />}>
+                    <Route index element={<IndexAdminPage />} />
                 </Route>
             </Routes>
         </>
