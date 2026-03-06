@@ -11,6 +11,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import DeliveriesPage from "./pages/DeliveriesPage";
 
 import IndexAdminPage from "./pages/Admin/IndexAdminPage";
+import CategoryAdminPage from "./pages/Admin/Category/CategoryAdminPage";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
                 </Route>
                 <Route path={"/admin"} element={<AdminLayout />}>
                     <Route index element={<IndexAdminPage />} />
+                    <Route path="/admin/categories" element={<CategoryAdminPage />} />
                 </Route>
             </Routes>
         </>
