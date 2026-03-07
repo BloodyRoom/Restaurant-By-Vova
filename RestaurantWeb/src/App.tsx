@@ -4,10 +4,16 @@ import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
 import MainLayout from "./components/layouts/MainLayout";
+import AdminLayout from "./components/layouts/AdminLayout";
 import MenuPage from "./pages/MenuPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import DeliveriesPage from "./pages/DeliveriesPage";
+
+import IndexAdminPage from "./pages/Admin/IndexAdminPage";
+import CategoryAdminPage from "./pages/Admin/Category/CategoryAdminPage";
+import ProductAdminPage from "./pages/Admin/Product/ProductAdminPage";
+import OrderAdminPage from "./pages/Admin/Delivery/DeliveryAdminPage";
 
 function App() {
 
@@ -16,14 +22,20 @@ function App() {
             <Routes>
                 <Route path={"/"} element={<MainLayout/>}>
                     <Route index element={<IndexPage />} />
-                    <Route path={"/menu"} element={<MenuPage />} />
-                    <Route path={"/cart"} element={<CartPage />} />
-                    <Route path={"/checkout"} element={<CheckoutPage />} />
-                    <Route path={"/deliveries"} element={<DeliveriesPage />} />
+                    <Route path={"menu"} element={<MenuPage />} />
+                    <Route path={"cart"} element={<CartPage />} />
+                    <Route path={"checkout"} element={<CheckoutPage />} />
+                    <Route path={"deliveries"} element={<DeliveriesPage />} />
 
 
                     <Route path="/auth/login" element={<LoginPage />} />
                     <Route path="/auth/register" element={<RegisterPage />} />
+                </Route>
+                <Route path={"/admin"} element={<AdminLayout />}>
+                    <Route index element={<IndexAdminPage />} />
+                    <Route path="categories" element={<CategoryAdminPage />} />
+                    <Route path="menu" element={<ProductAdminPage />} />
+                    <Route path="orders" element={<OrderAdminPage />} />
                 </Route>
             </Routes>
         </>

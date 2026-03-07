@@ -60,26 +60,34 @@ export const Navbar = () => {
                             <>
                                 <p className={"text-white"}>{user.name}</p>
 
-                                <div className="relative">
+                                {user.roles.includes("Admin") && (
                                     <Button
-                                        onClick={() => navigator("/cart")}
+                                        onClick={() => navigator("/admin")}
                                         variant="none"
                                         size="sm"
                                     >
-                                        Кошик {totalItems > 0 && (<span>({totalItems})</span>)}
+                                        Адмін панель
                                     </Button>
+                                )}
 
-                                    <Button
-                                        onClick={() => {
-                                            dispatch(logout());
-                                            navigator("/");
-                                        }}
-                                        variant="secondary"
-                                        size="sm"
-                                    >
-                                        Вийти
-                                    </Button>
-                                </div>
+                                <Button
+                                    onClick={() => navigator("/cart")}
+                                    variant="none"
+                                    size="sm"
+                                >
+                                    Кошик {totalItems > 0 && (<span>({totalItems})</span>)}
+                                </Button>
+
+                                <Button
+                                    onClick={() => {
+                                        dispatch(logout());
+                                        navigator("/");
+                                    }}
+                                    variant="secondary"
+                                    size="sm"
+                                >
+                                    Вийти
+                                </Button>
                             </>
                         ) : (
                             <>
