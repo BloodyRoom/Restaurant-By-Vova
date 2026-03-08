@@ -5,7 +5,7 @@ import App from './App'
 import {BrowserRouter} from "react-router";
 import {Provider} from "react-redux";
 import {store} from "./store";
-
+//@ts-ignore
 import "@fontsource/manrope"
 
 createRoot(document.getElementById('root')!).render(

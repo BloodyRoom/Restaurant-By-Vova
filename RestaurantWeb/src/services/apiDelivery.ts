@@ -1,9 +1,9 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
 import {serverBaseQuery} from "../utils/fetchBaseQuery";
-import {IDelivery} from "../types/delivery/IDelivery";
-import {IDeliveryCreate} from "../types/delivery/IDeliveryCreate";
-import {IDeliveryUpdate} from "../types/delivery/IDeliveryUpdate";
-import {IDeliveryWithUser} from "../types/delivery/IDeliveryWithUser";
+import {type IDelivery} from "../types/delivery/IDelivery";
+import {type IDeliveryCreate} from "../types/delivery/IDeliveryCreate";
+import {type IDeliveryUpdate} from "../types/delivery/IDeliveryUpdate";
+import {type IDeliveryWithUser} from "../types/delivery/IDeliveryWithUser";
 import {getUserInfo} from "../utils/tokenUtil";
 
 export const apiDelivery = createApi({

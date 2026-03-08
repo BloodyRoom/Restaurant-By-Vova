@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Input, Button } from "../../components/ui"
 import { useRegisterMutation } from "../../services/apiAccount";
-import { useAppDispatch } from "../../store";
-import { login } from "../../store/authSlice";
-import { IAccountRegister } from "../../types/account/IAccountRegister";
+// import { useAppDispatch } from "../../store";
+// import { login } from "../../store/authSlice";
+import { type IAccountRegister } from "../../types/account/IAccountRegister";
 
 const RegisterPage = () => {
     const navigator = useNavigate();
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
     const [registerRequest] = useRegisterMutation();
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
         event.preventDefault();

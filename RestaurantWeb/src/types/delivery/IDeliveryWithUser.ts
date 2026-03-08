@@ -1,5 +1,5 @@
-import { IDeliveryProduct } from "./IDeliveryProduct";
-import {IAccount} from "../account/IAccount";
+import { type IDeliveryProduct } from "./IDeliveryProduct";
+import { type IAccount} from "../account/IAccount";
 
 export interface IDeliveryWithUser {
     id: number;

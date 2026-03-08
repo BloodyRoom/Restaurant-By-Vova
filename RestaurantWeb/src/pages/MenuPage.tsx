@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { Button, Card } from "../components/ui";
-import { IProduct } from "../types/product/IProduct";
+import { type IProduct } from "../types/product/IProduct";
 import { useGetCategoriesQuery } from "../services/apiCategory";
 import { useGetProductsQuery } from "../services/apiProduct";
 import {useGetCartsQuery, useCartCreateMutation, useCartUpdateMutation} from "../services/apiCart";
