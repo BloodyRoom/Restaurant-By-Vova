@@ -5,7 +5,7 @@ docker login
 
 REM ==== WEB ====
 cd RestaurantWeb
-docker build -t u-vovy --build-arg VITE_API_URL=https://u-vovy.itstep.click .
+docker build -t u-vovy --build-arg VITE_API_URL=https://api-u-vovy.itstep.click .
 docker tag u-vovy:latest novakvova/u-vovy:latest
 docker push novakvova/u-vovy:latest
 

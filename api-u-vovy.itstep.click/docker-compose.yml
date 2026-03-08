@@ -35,6 +35,12 @@ services:
       - db
     networks:
       - vovy_net
+      
+  front:
+    image: novakvova/u-vovy:latest
+    container_name: u-vovy_front
+    ports:
+      - "4007:80"
 
   db-backup:
     image: postgres:18.1
