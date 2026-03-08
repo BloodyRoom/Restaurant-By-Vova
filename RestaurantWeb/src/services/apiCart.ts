@@ -1,8 +1,8 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
 import {serverBaseQuery} from "../utils/fetchBaseQuery";
-import {ICart} from "../types/cart/ICart";
-import {ICartCreate} from "../types/cart/ICartCreate";
-import {ICartUpdate} from "../types/cart/ICartUpdate";
+import {type ICart} from "../types/cart/ICart";
+import {type ICartCreate} from "../types/cart/ICartCreate";
+import {type ICartUpdate} from "../types/cart/ICartUpdate";
 
 export const apiCart = createApi({
     reducerPath: "apiCart",

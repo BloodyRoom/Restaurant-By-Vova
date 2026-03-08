@@ -133,6 +133,10 @@ app.UseCors("AllowAll");
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<RestaurantDbContext>();
+
+    if(context!=null)
+        context.Database.Migrate();
 
     var userManager = services.GetRequiredService<UserManager<UserEntity>>();
     var roleManager = services.GetRequiredService<RoleManager<RoleEntity>>();

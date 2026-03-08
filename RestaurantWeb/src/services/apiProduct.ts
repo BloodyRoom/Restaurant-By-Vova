@@ -1,10 +1,10 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
 import {serverBaseQuery} from "../utils/fetchBaseQuery";
-import {IProduct} from "../types/product/IProduct";
-import {IProductCreate} from "../types/product/IProductCreate";
+import {type IProduct} from "../types/product/IProduct";
+import {type IProductCreate} from "../types/product/IProductCreate";
 import {getUserInfo} from "../utils/tokenUtil";
 import {serialize} from "object-to-formdata";
-import {IProductUpdate} from "../types/product/IProductUpdate";
+import {type IProductUpdate} from "../types/product/IProductUpdate";
 
 export const apiProduct = createApi({
     reducerPath: "apiProduct",

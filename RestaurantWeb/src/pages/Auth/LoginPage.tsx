@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Input } from "../../components/ui"
 import { useNavigate } from "react-router";
-import { IAccountLogin } from "../../types/account/IAccountLogin";
+import { type IAccountLogin } from "../../types/account/IAccountLogin";
 import { useLoginMutation } from "../../services/apiAccount";
 import { useAppDispatch } from "../../store";
 import { login } from "../../store/authSlice";

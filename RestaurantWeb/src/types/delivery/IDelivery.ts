@@ -1,4 +1,4 @@
-import { IDeliveryProduct } from "./IDeliveryProduct";
+import { type IDeliveryProduct } from "./IDeliveryProduct";
 
 export interface IDelivery {
     id: number;
