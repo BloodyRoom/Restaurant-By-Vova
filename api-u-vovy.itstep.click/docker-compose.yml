@@ -1,13 +1,13 @@
 version: "3.9"
 
 networks:
-  restaurant_net:
+  vovy_net:
     driver: bridge
 
 services:
   db:
     image: postgres:18.1
-    container_name: restaurant-db-container
+    container_name: u-vovy-db-container
     restart: unless-stopped
     ports:
       - "5475:5432"
@@ -18,11 +18,11 @@ services:
     volumes:
       - ${VOLUME_POSTGRES}
     networks:
-      - restaurant_net
+      - vovy_net
 
   api:
-    image: novakvova/restaurant-api:latest
-    container_name: restaurant-api-container
+    image: novakvova/api-u-vovy:latest
+    container_name: api-u-vovy-container
     restart: unless-stopped
     volumes:
       - ${VOLUME_SERVERAPI}
@@ -34,11 +34,11 @@ services:
     depends_on:
       - db
     networks:
-      - restaurant_net
+      - vovy_net
 
   db-backup:
     image: postgres:18.1
-    container_name: restaurant-db-backup
+    container_name: u-vovy-db-backup
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -47,7 +47,7 @@ services:
       - ${VOLUME_POSTGRES}:/var/lib/postgresql/data
       - ./backups:/backups
     networks:
-      - restaurant_net
+      - vovy_net
     entrypoint: >
       sh -c "
         while true; do
