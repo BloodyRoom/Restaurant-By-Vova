@@ -30,7 +30,7 @@ backend** and a **React + TypeScript frontend**.
 
 ### Other
 
--   Docker (frontend container)
+-   Docker (frontend lol  container)
 -   PostgreSQL / Neon database
 
 ------------------------------------------------------------------------
